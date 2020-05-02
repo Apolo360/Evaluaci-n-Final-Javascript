@@ -27,7 +27,7 @@ function init(){
 	var ocho = document.getElementById('8');
 	var nueve = document.getElementById('9');
 
-	//eventos
+	//EVENTOS
 
 	uno.onclick = function(e){
 		if(resultado.innerHTML == "0"){
@@ -36,18 +36,17 @@ function init(){
 			resultado.textContent += "1";
 		}
 
-		if(resultado.textContent.length <= 8){
-			//operandoA = resultado.textContent;
-			operandoA = resultado.textContent.slice(0,8); 
-		}
+		mostrar("1");
 	}
 	dos.onclick = function(e){
-	
+		
 		if(resultado.innerHTML == "0"){
 			resultado.textContent = "2";
 		}else{
 			resultado.textContent += "2";
 		}
+		mostrar("2");
+	
 	}
 	tres.onclick = function(e){
 		
@@ -56,6 +55,7 @@ function init(){
 		}else{
 			resultado.textContent += "3";
 		}
+		mostrar("3");
 	}
 	cuatro.onclick = function(e){
 		
@@ -64,6 +64,7 @@ function init(){
 		}else{
 			resultado.textContent += "4";
 		}
+		mostrar("4");
 	}
 	cinco.onclick = function(e){
 		
@@ -72,6 +73,7 @@ function init(){
 		}else{
 			resultado.textContent += "5";
 		}
+		mostrar("5");
 	}
 	seis.onclick = function(e){
 		
@@ -80,6 +82,7 @@ function init(){
 		}else{
 			resultado.textContent += "6";
 		}
+		mostrar("6");
 	}
 	siete.onclick = function(e){
 		
@@ -88,6 +91,7 @@ function init(){
 		}else{
 			resultado.textContent += "7";
 		}
+		mostrar("7");
 	}
 	ocho.onclick = function(e){
 		
@@ -96,6 +100,7 @@ function init(){
 		}else{
 			resultado.textContent += "8";
 		}
+		mostrar("8");
 	}
 	nueve.onclick = function(e){
 		
@@ -104,6 +109,7 @@ function init(){
 		}else{
 			resultado.textContent += "9";
 		}
+		mostrar("9");
 	}
 	cero.onclick = function(e){
 		
@@ -112,6 +118,7 @@ function init(){
 		}else{
 			resultado.textContent += "0";
 		}
+		mostrar("0");
 	}
 
 	reset.onclick= function(e){
@@ -135,6 +142,7 @@ function init(){
 		}
 	}
 
+//eventos de "onclick" que escucha cada vez que se da click al icono del teclado de la calculadora
 	suma.onclick= function(e){
 		operandoA = resultado.textContent;
 		operacion = "+";
@@ -157,25 +165,48 @@ function init(){
 	}
 	igual.onclick= function(e){
 		operandoB = resultado.textContent;
+		//mostrarResultado();
 		resolver();
 	}
 
-	//metodos
+
+	//-----------metodos------------------//
+
+//Funciones que permiten eliminar todo el contenido de la pantalla
+// y reiniciar la calculadora
 
 	function limpiar(){
 		resultado.textContent = "";
 	}
+
 	function resetear(){
 		resultado.textContent = 0;
 		operandoA =0;
 		operandoB = 0;
 		operacion = "";
 	}
+/*---------------------------------------------*/
+
+//funcion que permite contar el numeros de digitos 
+//que esten en la pantalla  y borrar si llega a "8"
+
+	function mostrar(num){
+		if(resultado.textContent.length < 8){
+			if(resultado.innerHTML =="0"){
+				resultado.textContent = num;
+			}
+		}else{
+			resultado.textContent = "0";
+		}
+	}
+//---------------------------------------------------------//
 
 
+//Funcion que permite efectuar todas las operaciones basicas de la calculadora
 
 	function resolver(){
-		var res = 0;
+		var res = 0;//variable que me guarda los resultados
+
 		switch(operacion){
 			case "+":
 			res = parseFloat(operandoA) + parseFloat(operandoB);
@@ -190,8 +221,8 @@ function init(){
 			res = parseFloat(operandoA) % parseFloat(operandoB);
 			break;
 		}
-		resetear();
-		resultado.textContent = res;
+		resetear();//esta linea invoca la funcion de reiniciar la calculadora
+		resultado.textContent = res.toString().substring(0,8);//esta linea realiza una conversion del resultado a texto para mostralo en pantalla hasta max 8 num.
 	}
 
 }
