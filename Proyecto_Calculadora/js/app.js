@@ -160,7 +160,7 @@ function init(){
 	}
 	division.onclick= function(e){
 		operandoA = resultado.textContent;
-		operacion = "%";
+		operacion = "/";
 		limpiar();
 	}
 	igual.onclick= function(e){
@@ -217,8 +217,8 @@ function init(){
 			case "*":
 			res = parseFloat(operandoA) * parseFloat(operandoB);
 			break;
-			case "%":
-			res = parseFloat(operandoA) % parseFloat(operandoB);
+			case "/":
+			res = parseFloat(operandoA) / parseFloat(operandoB);
 			break;
 		}
 		resetear();//esta linea invoca la funcion de reiniciar la calculadora
